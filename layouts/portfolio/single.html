@@ -1,21 +1,30 @@
 {{ partial "header" .}}
 
 <h1>{{ .Title }}</h1>
-<div class="tags">
-  {{ partial "portfolio/tags" .}}
+<div class="tags">{{ partial "portfolio/tags" .}}</div>
+
+{{ if .Params.Video }}
+<h3>Demo</h3>
+<div class="">
+    <video controls width="308" height="auto">
+      <source src="/portfolio/{{.Params.Video}}" type="video/mp4">
+      Sorry, your browser doesn't support video elements.
+      </video>
 </div>
+{{ else }}
 
-<img title="{{.Title}}" alt="{{.Title}}" src="/portfolio/{{ .Params.Thumbnail }}" />
-
-{{ .Content }}
-
-{{ if .Params.testimonial }}
-  <h3>Testimonial</h3>
-  <div class="testimonial-list">
-    {{ with .Params.testimonial }}
-        {{ partial "portfolio/testimonial" . }}
-    {{ end }}
-  </div>
+<img
+  title="{{.Title}}"
+  alt="{{.Title}}"
+  src="/portfolio/{{ .Params.Thumbnail }}"
+  width="60%"
+  height="auto"
+/>
 {{ end }}
 
-{{ partial "footer" .}}
+{{ .Content }} {{ if .Params.testimonial }}
+<h3>Testimonial</h3>
+<div class="testimonial-list">
+  {{ with .Params.testimonial }} {{ partial "portfolio/testimonial" . }} {{ end }}
+</div>
+{{ end }} {{ partial "footer" .}}
