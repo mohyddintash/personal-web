@@ -7,6 +7,7 @@
   {{ partialCached "sidebar/sidebar" .}}
 
   <div class="content-wrapper">
+    {{ partial "sidebar/themetoggle" . }}
     {{ if .Site.Params.breadcrumb }}
       {{ partial "breadcrumb" .}}
     {{ end }}
